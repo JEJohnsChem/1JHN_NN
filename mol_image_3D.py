@@ -24,12 +24,12 @@ def make_image(mol):
         
     return V
 
-def make_image_input(mol,A,B):
+def make_image_input(mol,A,B,gshape=64):
     """
     Takes an openbabel molecule input, mol, and the atom indices for the two atoms for which  you are interested in the coupling
     returns a flattend numpy array of the electrostatic potential with the X,Y,Z coordinates of A and B appended
     """
-    gshape=64
+    
     epsilon=0.00000001
     grid=np.linspace(-10,10.,gshape)
     XXX,YYY,ZZZ=np.meshgrid(grid,grid,grid)
@@ -48,12 +48,12 @@ def make_image_input(mol,A,B):
     output=np.append(output,[mol.GetAtom(B).GetX(), mol.GetAtom(B).GetY(), mol.GetAtom(B).GetZ()])
     output=output.reshape(gshape*gshape*gshape+6,1)
     return output
-def make_conv_input(mol,A,B):
+def make_conv_input(mol,A,B,gshape=64):
     """
     Takes an openbabel molecule input, mol, and the atom indices for the two atoms for which  you are interested in the coupling
     returns a flattend numpy array of the electrostatic potential with the X,Y,Z coordinates of A and B appended
     """
-    gshape=64
+    
     epsilon=0.00000001
     grid=np.linspace(-6.,6.,gshape)
     XXX,YYY,ZZZ=np.meshgrid(grid,grid,grid)
